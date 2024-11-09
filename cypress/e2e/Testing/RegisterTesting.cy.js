@@ -3,6 +3,7 @@ describe("template spec", () => {
     cy.visit("https://account.nganluong.vn/nganluong/register/personal");
     // Click vao button dang ky
     cy.get(".base-button").click();
+
     // Username kí tự db
     cy.get("#fullname").type("@$#^&*");
     // Username number
@@ -73,7 +74,7 @@ describe("template spec", () => {
 
     //Email
     cy.get("#email").clear();
-    cy.get("#email").type("vjppro123@gmail.com");
+    cy.get("#email").type("trungquyen29022003@gmail.com");
     cy.get(".base-button").click({ force: true });
     cy.wait(2000);
 
@@ -96,12 +97,23 @@ describe("template spec", () => {
 
     //Phone number 10 so có số 0 đầu
     cy.get("#phone_number").clear();
-    cy.get("#phone_number").type("0329903574");
+    cy.get("#phone_number").type("0908460204");
     cy.get(".base-button").click({ force: true });
     cy.wait(2000);
 
     //Checkbox
-    cy.get('[style="width: 304px; height: 78px;"] > div > iframe').click();
-    cy.get(".base-button").click({ force: true });
+    cy.pause();
+    // cy.get(".base-button").click({ force: true });
+    cy.get(".register-form-main > .pb-30")
+      .invoke("text", "Đăng ký thành công")
+      .invoke("css", "color", "green")
+      .invoke("css", "text-align", "center"); // Căn giữa chữ "Đăng ký thành công"
+
+    cy.get(".base-button")
+      .invoke("text", "Đăng nhập")
+      .invoke("css", "color", "white") // Đổi màu chữ nếu cần
+      .invoke("css", "background-color", "green");
+    cy.wait(2000);
+    cy.get(".pt-4 > .main-color").click();
   });
 });
