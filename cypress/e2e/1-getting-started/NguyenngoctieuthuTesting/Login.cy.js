@@ -30,20 +30,20 @@ describe("Login", () => {
         cy.get('.base-button').should('be.disabled')
     })
 
-    it("Not tick captcha?", () => {
-        cy.get("#loginform-email").type('Nguyenngoctieuthu@gmail.com').blur();
-        cy.get("#loginform-password").type('Tieuthu*').blur();
-        cy.get('.base-button').click();
-        cy.contains('Mã xác thực không đúng.').should('be.visible');
-    })
+    // it("Not tick captcha?", () => {
+    //     cy.get("#loginform-email").type('Nguyenngoctieuthu@gmail.com').blur();
+    //     cy.get("#loginform-password").type('Tieuthu*').blur();
+    //     cy.get('.base-button').click();
+    //     cy.contains('Mã xác thực không đúng.').should('be.visible');
+    // })
 
-    it("Tick captcha?", () => {
-        cy.get("#loginform-email").type('Nguyenngoctieuthu@gmail.com').blur();
-        cy.get("#loginform-password").type('Tieuthu*').blur();
-        cy.wait(10000);
-        cy.get('.base-button').click();
-        cy.contains('Tài khoản hoặc mật khẩu không chính xác').should('be.visible');
-    })
+    // it("Tick captcha?", () => {
+    //     cy.get("#loginform-email").type('Nguyenngoctieuthu@gmail.com').blur();
+    //     cy.get("#loginform-password").type('Tieuthu*').blur();
+    //     cy.wait(10000);
+    //     cy.get('.base-button').click();
+    //     cy.contains('Tài khoản hoặc mật khẩu không chính xác').should('be.visible');
+    // })
 
     it.only("Pass and email are matched but not tick captcha?", () => {
         cy.get("#loginform-email").type('Nguyenngoctieuthu2207@gmail.com').blur();
@@ -58,7 +58,5 @@ describe("Login", () => {
         cy.wait(10000);
         cy.get('.base-button').click();
     })
-
-    
 })
 

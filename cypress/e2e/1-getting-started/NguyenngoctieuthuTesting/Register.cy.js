@@ -2,24 +2,21 @@ describe("Fullname", () => {
   beforeEach(() => {
     cy.visit("https://account.nganluong.vn/nganluong/register");
     cy.contains("button", "Tạo tài khoản cá nhân").click();
-    cy.wait(2000)
   });
 
   it("Leave emty", () => {
     cy.get("#fullname").focus().blur();
     cy.contains("Tên chủ tài khoản không được để trống.").should("be.visible");
-    cy.wait(2000)
   });
 
   it("Check enter number?", () => {
     cy.get("#fullname").type("Nguyen thu 111").blur();
     cy.contains("Họ và tên sai định dạng").should("be.visible");
     cy.get(".base-button").click();
-    cy.wait(2000)
+    cy.wait(2000);
     cy.get("#fullname").clear();
     cy.get("#fullname").type("111111").blur();
     cy.contains("Họ và tên sai định dạng").should("be.visible");
-    cy.wait(2000)
   });
 
   it("Check enter special character?", () => {
@@ -27,43 +24,36 @@ describe("Fullname", () => {
     cy.get("#fullname")
       .invoke("val")
       .should("match", /^Nguyen thu 111\s*$/);
-      cy.wait(2000)
   });
 
   it("Check enter full space?", () => {
     cy.get("#fullname").type("        ").blur();
     cy.contains("Tên chủ tài khoản không được để trống.").should("be.visible");
-    cy.wait(2000)
   });
 
   it("Check enter 1 character?", () => {
     cy.get("#fullname").type("1").blur();
     cy.contains("Họ và tên sai định dạng").should("be.visible");
-    cy.wait(2000)
   });
 
   it("Check enter 2 character?", () => {
     cy.get("#fullname").type("Ng").blur();
     cy.contains("Họ và tên sai định dạng").should("be.visible");
-    cy.wait(2000)
   });
 
   it("Check enter 7 character?", () => {
-    cy.get("#fullname").type("Nguyễn").blur();
+    cy.get("#fullname").type("Nguyễnn").blur();
     cy.contains("Họ và tên sai định dạng").should("be.visible");
-    cy.wait(2000)
   });
 
   it("Check enter 8 character?", () => {
     cy.get("#fullname").type("Nguyễn N").blur();
     cy.contains("Họ và tên sai định dạng").should("not.exist");
-    cy.wait(2000)
   });
 
   it("Check enter 9 character?", () => {
     cy.get("#fullname").type("Nguyễn Ng").blur();
     cy.contains("Họ và tên sai định dạng").should("not.exist");
-    cy.wait(2000)
   });
 
   it("Check enter 55 character?", () => {
@@ -71,13 +61,11 @@ describe("Fullname", () => {
       .type("Nguyễn Hoàng Kim Bảo Trân Thảo My Quỳnh Thanh Vân Ái Linh")
       .blur();
     cy.contains("Họ và tên sai định dạng").should("not.exist");
-    cy.wait(2000)
   });
 
   it("Check enter 99 character?", () => {
     cy.get("#fullname").type("1").blur();
     cy.contains("Họ và tên sai định dạng").should("not.exist");
-    cy.wait(2000)
   });
 
   it("Check enter 100 character?", () => {
@@ -87,7 +75,6 @@ describe("Fullname", () => {
       )
       .blur();
     cy.contains("Họ và tên sai định dạng").should("not.exist");
-    cy.wait(2000)
   });
 
   it("Check enter 101 character?", () => {
@@ -97,7 +84,6 @@ describe("Fullname", () => {
       )
       .blur();
     cy.contains("Họ và tên sai định dạng").should("be.visible");
-    cy.wait(2000)
   });
 });
 
@@ -105,7 +91,6 @@ describe("Password", () => {
   beforeEach(() => {
     cy.visit("https://account.nganluong.vn/nganluong/register");
     cy.contains("button", "Tạo tài khoản cá nhân").click();
-    cy.wait(2000)
   });
 
   it("Valid password", () => {
@@ -306,6 +291,54 @@ describe("Email", () => {
   });
 });
 
+describe("Phone numbers", () => {
+  beforeEach(() => {
+    cy.visit("https://account.nganluong.vn/nganluong/register");
+    cy.contains("button", "Tạo tài khoản cá nhân").click();
+  });
+
+  it("Check Leave empty?", () => {
+    cy.get("#phone_number").focus().blur();
+    cy.contains("Số điện thoại không được để trống.").should("be.visible");
+  });
+
+  it("Check enter full space?", () => {
+    cy.get("#phone_number").type("        ").blur();
+    cy.contains("Số điện thoại không được để trống.").should("be.visible");
+  });
+
+  it("Check enter alphabet character?", () => {
+    cy.get("#phone_number").type("Thuthuthut").blur();
+    cy.contains("Số điện thoại không hợp lệ").should("be.visible");
+  });
+
+  it("not following the rule of VietNam phone numbers?", () => {
+    cy.get("#phone_number").type("1234567890").blur();
+    cy.contains("Số điện thoại không hợp lệ").should("be.visible");
+  });
+
+  it("Check enter 9 characters?", () => {
+    cy.get("#phone_number").type("012345678").blur();
+    cy.contains("Số điện thoại phải chứa ít nhất 10 ký tự.").should(
+      "be.visible"
+    );
+  });
+
+  it("Check enter 10 characters?", () => {
+    cy.get("#phone_number").type("0935367598").blur();
+    cy.contains("Số điện thoại không hợp lệ").should("not.exist");
+  });
+
+  it("Check enter 11 characters?", () => {
+    cy.get("#phone_number").type("09353675983").blur();
+    cy.contains("Số điện thoại không hợp lệ").should("be.visible");
+  });
+
+  it("Check enter 12 characters?", () => {
+    cy.get("#phone_number").type("012345678912").blur();
+    cy.contains("Số điện thoại không hợp lệ").should("be.visible");
+  });
+});
 describe("successfull register", () => {
   beforeEach(() => {
     cy.visit("https://account.nganluong.vn/nganluong/register");
@@ -339,8 +372,23 @@ describe("successfull register", () => {
     cy.get("#email").type("Nguyenngoctieuthu2207@gmail.com").blur();
     cy.get("#phone_number").type("0935367598").blur();
     cy.wait(15000);
-    cy.get(".base-button").click({force : true});
+    cy.get(".base-button").click({ force: true });
     // click login button so that direct to login page
-    cy.get('.base-button w-md-100').click();
+    cy.get(".base-button w-md-100").click();
+  });
+
+  it("Email information exists in the system", () => {
+    cy.get("#fullname").type("Nguyễn Thư").blur();
+    cy.get("#password").type("Tieuthu*").blur();
+    cy.get("#confirm_password").type("Tieuthu*").blur();
+    cy.get("#email").type("Nguyenngoctieuthu2207@gmail.com").blur();
+    cy.get("#phone_number").type("0935367598").blur();
+    cy.contains(
+      "Email đã tồn tại trên hệ thống. Vui lòng chọn email khác."
+    ).should("be.visible");
+    cy.contains("SĐT đã tồn tại trên hệ thống. Vui lòng nhập SĐT khác.").should(
+      "be.visible"
+    );
+    cy.get(".base-button").click({ force: true });
   });
 });
