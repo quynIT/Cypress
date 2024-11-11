@@ -246,7 +246,7 @@ describe("Email", () => {
     cy.contains("Email không đúng định dạng").should("be.visible");
   });
 
-  it("Check missng '.'?", () => {
+  it("Check missing '.'?", () => {
     cy.get("#email").type("tieuthugmail@com").blur();
     cy.contains("Email không đúng định dạng").should("be.visible");
   });
@@ -312,12 +312,35 @@ describe("successfull register", () => {
     cy.contains("button", "Tạo tài khoản cá nhân").click();
   });
 
+  it("any invalid information 1", () => {
+    cy.get("#fullname").type("Nguyễn Ngọc Tiểu Thư").blur();
+    cy.get("#password").type("Tieuthu*").blur();
+    cy.get("#confirm_password").type("Tieuthu*").blur();
+    cy.get("#email").type("Nguyenngoctieuthu2207@gmail.com").blur();
+    cy.get("#phone_number").type("0935367").blur();
+    cy.wait(2000);
+    cy.get(".base-button").click();
+  });
+
+  it("any invalid information 2", () => {
+    cy.get("#fullname").type("Nguyễn Ngọc Tiểu Thư 111").blur();
+    cy.get("#password").type("Tieuthu*").blur();
+    cy.get("#confirm_password").type("Tieuthu*").blur();
+    cy.get("#email").type("Nguyenngoctieuthu2207&&@gmail.com").blur();
+    cy.get("#phone_number").type("093536759").blur();
+    cy.wait(2000);
+    cy.get(".base-button").click();
+  });
+
   it("valid full information", () => {
     cy.get("#fullname").type("Nguyễn Ngọc Tiểu Thư").blur();
     cy.get("#password").type("Tieuthu*").blur();
     cy.get("#confirm_password").type("Tieuthu*").blur();
-    cy.get("#email").type("thu@gmail.com").blur();
-    cy.get("#phone_number").type("0796789057").blur();
-    cy.get(".base-button").click();
+    cy.get("#email").type("Nguyenngoctieuthu2207@gmail.com").blur();
+    cy.get("#phone_number").type("0935367598").blur();
+    cy.wait(15000);
+    cy.get(".base-button").click({force : true});
+    // click login button so that direct to login page
+    cy.get('.base-button w-md-100').click();
   });
 });
