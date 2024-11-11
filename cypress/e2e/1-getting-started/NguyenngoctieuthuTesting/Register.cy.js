@@ -2,18 +2,24 @@ describe("Fullname", () => {
   beforeEach(() => {
     cy.visit("https://account.nganluong.vn/nganluong/register");
     cy.contains("button", "Tạo tài khoản cá nhân").click();
+    cy.wait(2000)
   });
 
   it("Leave emty", () => {
     cy.get("#fullname").focus().blur();
     cy.contains("Tên chủ tài khoản không được để trống.").should("be.visible");
+    cy.wait(2000)
   });
 
   it("Check enter number?", () => {
-    cy.get("#fullname").type("Nguyen thu 111");
+    cy.get("#fullname").type("Nguyen thu 111").blur();
+    cy.contains("Họ và tên sai định dạng").should("be.visible");
+    cy.get(".base-button").click();
+    cy.wait(2000)
     cy.get("#fullname").clear();
     cy.get("#fullname").type("111111").blur();
     cy.contains("Họ và tên sai định dạng").should("be.visible");
+    cy.wait(2000)
   });
 
   it("Check enter special character?", () => {
@@ -21,36 +27,43 @@ describe("Fullname", () => {
     cy.get("#fullname")
       .invoke("val")
       .should("match", /^Nguyen thu 111\s*$/);
+      cy.wait(2000)
   });
 
   it("Check enter full space?", () => {
     cy.get("#fullname").type("        ").blur();
     cy.contains("Tên chủ tài khoản không được để trống.").should("be.visible");
+    cy.wait(2000)
   });
 
   it("Check enter 1 character?", () => {
     cy.get("#fullname").type("1").blur();
     cy.contains("Họ và tên sai định dạng").should("be.visible");
+    cy.wait(2000)
   });
 
   it("Check enter 2 character?", () => {
     cy.get("#fullname").type("Ng").blur();
     cy.contains("Họ và tên sai định dạng").should("be.visible");
+    cy.wait(2000)
   });
 
   it("Check enter 7 character?", () => {
     cy.get("#fullname").type("Nguyễn").blur();
     cy.contains("Họ và tên sai định dạng").should("be.visible");
+    cy.wait(2000)
   });
 
   it("Check enter 8 character?", () => {
     cy.get("#fullname").type("Nguyễn N").blur();
     cy.contains("Họ và tên sai định dạng").should("not.exist");
+    cy.wait(2000)
   });
 
   it("Check enter 9 character?", () => {
     cy.get("#fullname").type("Nguyễn Ng").blur();
     cy.contains("Họ và tên sai định dạng").should("not.exist");
+    cy.wait(2000)
   });
 
   it("Check enter 55 character?", () => {
@@ -58,11 +71,13 @@ describe("Fullname", () => {
       .type("Nguyễn Hoàng Kim Bảo Trân Thảo My Quỳnh Thanh Vân Ái Linh")
       .blur();
     cy.contains("Họ và tên sai định dạng").should("not.exist");
+    cy.wait(2000)
   });
 
   it("Check enter 99 character?", () => {
     cy.get("#fullname").type("1").blur();
     cy.contains("Họ và tên sai định dạng").should("not.exist");
+    cy.wait(2000)
   });
 
   it("Check enter 100 character?", () => {
@@ -72,6 +87,7 @@ describe("Fullname", () => {
       )
       .blur();
     cy.contains("Họ và tên sai định dạng").should("not.exist");
+    cy.wait(2000)
   });
 
   it("Check enter 101 character?", () => {
@@ -81,6 +97,7 @@ describe("Fullname", () => {
       )
       .blur();
     cy.contains("Họ và tên sai định dạng").should("be.visible");
+    cy.wait(2000)
   });
 });
 
@@ -88,6 +105,7 @@ describe("Password", () => {
   beforeEach(() => {
     cy.visit("https://account.nganluong.vn/nganluong/register");
     cy.contains("button", "Tạo tài khoản cá nhân").click();
+    cy.wait(2000)
   });
 
   it("Valid password", () => {
@@ -288,7 +306,7 @@ describe("Email", () => {
   });
 });
 
-describe.only("successfull register", () => {
+describe("successfull register", () => {
   beforeEach(() => {
     cy.visit("https://account.nganluong.vn/nganluong/register");
     cy.contains("button", "Tạo tài khoản cá nhân").click();
