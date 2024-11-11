@@ -1,13 +1,40 @@
-describe('NganLuong.vn Login Test', () => {
-  it('Visits NganLuong.vn login page and enters login credentials', () => {
-    // Bước 1: Điều hướng đến trang đăng nhập
+describe('Login Test Without Captcha', () => {
+  it('Check when the [Email] field is empty', () => {
     cy.visit('https://account.nganluong.vn/nganluong/login');
 
-    // Bước 2: Điền thông tin đăng nhập
-    cy.get('#loginform-email').type('...');
-    cy.get('#loginform-password').type('...');
+    cy.get('#loginform-password').type('mypassword');
 
-    cy.wait(20000);
     cy.get('.base-button').click();
+
+    cy.wait(5000);
+  });
+
+  it('Check when the [Password] field is empty', () => {
+    cy.visit('https://account.nganluong.vn/nganluong/login');
+
+    cy.get('#loginform-email').type('abc@gmail.com');
+
+    cy.get('.base-button').click();
+
+    cy.wait(5000);
+  });
+
+  it('Check when the [Email] field and the [Password] field are empty', () => {
+    cy.visit('https://account.nganluong.vn/nganluong/login');
+
+    cy.get('.base-button').click();
+
+    cy.wait(5000);
+  });
+
+  it('Check when the [Captcha] box is unclicked', () => {
+    cy.visit('https://account.nganluong.vn/nganluong/login');
+
+    cy.get('#loginform-email').type('abc@gmail.com');
+    cy.get('#loginform-password').type('mypassword');
+
+    cy.get('.base-button').click();
+
+    cy.wait(5000);
   });
 });
