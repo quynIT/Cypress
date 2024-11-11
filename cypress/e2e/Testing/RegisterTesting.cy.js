@@ -115,5 +115,7 @@ describe("template spec", () => {
       .invoke("css", "background-color", "green");
     cy.wait(2000);
     cy.get(".pt-4 > .main-color").click();
+
+    /// Test Login
   });
 });
