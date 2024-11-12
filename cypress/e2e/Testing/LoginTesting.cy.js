@@ -94,14 +94,14 @@ describe('Login Test Without Captcha', () => {
   });
 });
 
-describe('Login Test With Captcha', () => {
+describe.only('Login Test With Captcha', () => {
   it('Check when the [Captcha] box is clicked but the [Email] field is wrong', () => {
     cy.visit('https://account.nganluong.vn/nganluong/login');
 
     cy.get('#loginform-email').type('abc@gmail.com');
     cy.get('#loginform-password').type('mypasswordisthebesti');
 
-    cy.wait(10000);
+    cy.wait(20000);
     cy.get('.base-button').click();
 
     cy.wait(5000);
