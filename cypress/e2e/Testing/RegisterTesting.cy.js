@@ -12,12 +12,18 @@ describe("template spec", () => {
     cy.wait(2000);
     // Username 1 kí tự
     cy.get("#fullname").clear();
-    cy.get("#fullname").type("abcdef");
+    cy.get("#fullname").type("a");
     cy.get(".base-button").click({ force: true });
     cy.wait(2000);
-    // Username 2 kí tự
+    // Username 100 kí tự
     cy.get("#fullname").clear();
-    cy.get("#fullname").type("Nguyễn Văn A");
+    cy.get("#fullname").type(
+      "Nguyễn Văn A Nguyễn Văn A Nguyễn Văn A Nguyễn Văn A Nguyễn Văn A Nguyễn Văn A Nguyễn Văn A Nguyễn Văn A Nguyễn Văn A Nguyễn Văn A"
+    );
+    cy.get(".base-button").click({ force: true });
+
+    cy.get("#fullname").clear();
+    cy.get("#fullname").type("Phan Gia Đạt");
     cy.get(".base-button").click({ force: true });
 
     cy.get("#password").invoke("attr", "type", "text");
@@ -103,19 +109,19 @@ describe("template spec", () => {
 
     //Checkbox
     cy.pause();
-    // cy.get(".base-button").click({ force: true });
     cy.get(".register-form-main > .pb-30")
       .invoke("text", "Đăng ký thành công")
       .invoke("css", "color", "green")
-      .invoke("css", "text-align", "center"); // Căn giữa chữ "Đăng ký thành công"
+      .invoke("css", "text-align", "center");
 
     cy.get(".base-button")
       .invoke("text", "Đăng nhập")
-      .invoke("css", "color", "white") // Đổi màu chữ nếu cần
+      .invoke("css", "color", "white")
       .invoke("css", "background-color", "green");
     cy.wait(2000);
     cy.get(".pt-4 > .main-color").click();
 
     /// Test Login
+    
   });
 });
