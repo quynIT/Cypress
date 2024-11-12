@@ -121,8 +121,8 @@ describe('Login Test With Captcha', () => {
   it('Check when the [Captcha] box is clicked but the [Email] field and the [Password] field are right', () => {
     cy.visit('https://account.nganluong.vn/nganluong/login');
 
-    cy.get('#loginform-email').type('phangiadat123@gmail.com');
-    cy.get('#loginform-password').type('0909205792D@t');
+    cy.get('#loginform-email').type('...');
+    cy.get('#loginform-password').type('...');
 
     cy.wait(10000);
     cy.get('.base-button').click();

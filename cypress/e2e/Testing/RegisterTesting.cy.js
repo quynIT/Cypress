@@ -80,7 +80,7 @@ describe("template spec", () => {
 
     //Email
     cy.get("#email").clear();
-    cy.get("#email").type("phangiadat123@gmail.com");
+    cy.get("#email").type("abc@gmail.com");
     cy.get(".base-button").click({ force: true });
     cy.wait(2000);
 
