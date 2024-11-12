@@ -240,6 +240,29 @@ describe("Email", () => {
     cy.get("#email").type("a%^&@gmail.com").blur();
     cy.contains("Email không đúng định dạng").should("not.exist");
   });
+  it("Check behind '.' not have character?", () => {
+    cy.get("#email").type("a@gmail.").blur();
+    cy.contains("Email không đúng định dạng").should("be.visible");
+  });
+
+  it("Check behind '@' not have character?", () => {
+    cy.get("#email").type("a@.com").blur();
+    cy.contains("Email không đúng định dạng").should("be.visible");
+  });
+  it("Check behind '@' have 1 character?", () => {
+    cy.get("#email").type("a@g.com").blur();
+    cy.contains("Email không đúng định dạng").should("be.visible");
+  });
+
+  it("Check behind '@' have 2 character?", () => {
+    cy.get("#email").type("a@gm.com").blur();
+    cy.contains("Email không đúng định dạng").should("be.visible");
+  });
+
+  it("Check behind '@' have 3 character?", () => {
+    cy.get("#email").type("a@gma.com").blur();
+    cy.contains("Email không đúng định dạng").should("not.exist");
+  });
 
   it("Check 9 character?", () => {
     cy.get("#email").type("a@gmail.c").blur();
