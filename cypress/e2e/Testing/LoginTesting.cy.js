@@ -112,7 +112,7 @@ describe('Login Test With Captcha', () => {
     cy.get('#loginform-email').type('abc@gmail.com');
     cy.get('#loginform-password').type('mypasswordisthebesti');
 
-    cy.wait(20000);
+    cy.wait(10000);
     cy.get('.base-button').click();
 
     cy.wait(5000);
@@ -124,7 +124,7 @@ describe('Login Test With Captcha', () => {
     cy.get('#loginform-email').type('phangiadat123@gmail.com');
     cy.get('#loginform-password').type('0909205792D@t');
 
-    cy.wait(20000);
+    cy.wait(10000);
     cy.get('.base-button').click();
 
     cy.wait(5000);

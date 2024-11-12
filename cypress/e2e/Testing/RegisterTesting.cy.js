@@ -63,7 +63,7 @@ describe("template spec", () => {
 
     // Password exact match
     cy.get("#confirm_password").clear();
-    cy.get("#confirm_password").type("jCy8T86#5GXuh8H");
+    cy.get("#confirm_password").type("09232424242Q@uyen");
     cy.get(".base-button").click({ force: true });
     cy.wait(2000);
 
@@ -80,7 +80,7 @@ describe("template spec", () => {
 
     //Email
     cy.get("#email").clear();
-    cy.get("#email").type("trungquyen29022003@gmail.com");
+    cy.get("#email").type("phangiadat123@gmail.com");
     cy.get(".base-button").click({ force: true });
     cy.wait(2000);
 
