@@ -71,6 +71,17 @@ describe('Login Test Without Captcha', () => {
     cy.wait(5000);
   });
 
+  it('Check when the value of the [Password] field if 13 characters are entered', () => {
+    cy.visit('https://account.nganluong.vn/nganluong/login');
+
+    cy.get('#loginform-email').type('abc@gmail.com');
+    cy.get('#loginform-password').type('mypasswordist');
+
+    cy.get('.base-button').click();
+
+    cy.wait(5000);
+  });
+
   it('Check when the value of the [Password] field if 20 characters are entered', () => {
     cy.visit('https://account.nganluong.vn/nganluong/login');
 
@@ -94,7 +105,7 @@ describe('Login Test Without Captcha', () => {
   });
 });
 
-describe.only('Login Test With Captcha', () => {
+describe('Login Test With Captcha', () => {
   it('Check when the [Captcha] box is clicked but the [Email] field is wrong', () => {
     cy.visit('https://account.nganluong.vn/nganluong/login');
 
